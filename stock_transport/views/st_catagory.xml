@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="stock_transport_view" model="ir.ui.view">
+        <field name="name">stock.transport.view.tree</field>
+        <field name="model">fleet.vehicle.model.category</field>
+        <!-- <field name="mode">primary</field>
+        <field name="priority">16</field> -->
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_category_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="max_weight"/>
+                <field name="max_volume"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="proposal_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="stock_transport_view"></field>
+    </record>
+
+</odoo>

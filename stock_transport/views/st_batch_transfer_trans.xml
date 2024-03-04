@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="stock_transport_batch_tranfer_tree_view" model="ir.ui.view">
+        <field name="name">stock.transport.batch.tranfer.tree.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="volume"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_transport_batch_tranfer_tree_view_inherit" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="stock_transport_batch_tranfer_tree_view"></field>
+    </record>
+
+    <record id="stock_transport_batch_tranfer_form_view" model="ir.ui.view">
+        <field name="name">stock.transport.batch.tranfer.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_delivery.view_picking_withcarrier_out_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='delivery_type']" position="after">
+                <field name="volume"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_transport_batch_tranfer_form_view_inherit" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_transport_batch_tranfer_form_view"></field>
+    </record>
+
+</odoo>

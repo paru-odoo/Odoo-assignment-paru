@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="st_batch_transfering_form" model="ir.ui.view">
+        <field name="name">st.batch.transfering.view.form</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="mode">primary</field>
+        <field name="priority">16</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="dock_id" placeholder="Select a Dock"/>
+                <field name="vehicle_id" placeholder="Select a Vehicle"/>
+                <field name="vehicle_catagory_id" placeholder="Select a Vehicle catagory"/>
+                <field name="max_volume" invisible="vehicle_catagory_id == False" widget="progressbar"/>
+                <field name="max_weight" invisible="vehicle_catagory_id == False" widget="progressbar"/>    
+            </xpath>
+        </field>
+    </record>
+
+    <record id="st_batch_transfering_view_form" model="ir.actions.act_window.view">
+        <field name="sequence">2</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="st_batch_transfering_form"></field>
+    </record>
+
+    <record id="view_stock_picking_batch_graph" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.graph</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <graph string="Batch Transfer" type="bar" sample="1">
+                <field name="scheduled_date"/>
+                <field name="vehicle_catagory_id"/>
+                <field name="max_weight" type="measure"/>
+                <!-- <field name="vehicle_id" type="measure"/> -->
+            </graph>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch_graph" model="ir.actions.act_window.view">
+        <field name="sequence">3</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_stock_picking_batch_graph"/>
+        <field name="act_window_id" ref="stock_picking_batch.stock_picking_batch_action"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+
+    <record id="view_res_config_settings_form_inherit_stock_custom" model="ir.ui.view">
+        <field name="name">res.config.settings.form.inherit.stock_custom</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[field[@name='stock_move_email_validation']]" position="after">
+                <setting id="install_stock_transport" help="Install Stock Transport Module">
+                    <field name="module_stock_transport"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

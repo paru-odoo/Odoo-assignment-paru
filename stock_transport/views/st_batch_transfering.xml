@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
+
+
+    <!-- form view -->
     <record id="st_batch_transfering_form" model="ir.ui.view">
         <field name="name">st.batch.transfering.view.form</field>
         <field name="model">stock.picking.batch</field>
@@ -9,8 +12,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
                 <field name="dock_id" placeholder="Select a Dock"/>
-                <field name="vehicle_id" placeholder="Select a Vehicle"/>
-                <field name="vehicle_catagory_id" placeholder="Select a Vehicle catagory"/>
+                <field name="vehicle_id" placeholder="Third Party Provider"/>
+                <field name="vehicle_catagory_id" placeholder="eg. Semi-truck"/>
                 <field name="max_volume" invisible="vehicle_catagory_id == False" widget="progressbar"/>
                 <field name="max_weight" invisible="vehicle_catagory_id == False" widget="progressbar"/>    
             </xpath>
@@ -18,11 +21,11 @@
     </record>
 
     <record id="st_batch_transfering_view_form" model="ir.actions.act_window.view">
-        <field name="sequence">2</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="st_batch_transfering_form"></field>
     </record>
 
+    <!-- graph chart -->
     <record id="view_stock_picking_batch_graph" model="ir.ui.view">
         <field name="name">stock.picking.batch.view.graph</field>
         <field name="model">stock.picking.batch</field>
@@ -30,17 +33,42 @@
             <graph string="Batch Transfer" type="bar" sample="1">
                 <field name="scheduled_date"/>
                 <field name="vehicle_catagory_id"/>
-                <field name="max_weight" type="measure"/>
-                <!-- <field name="vehicle_id" type="measure"/> -->
             </graph>
         </field>
     </record>
 
-    <record id="stock_picking_batch_graph" model="ir.actions.act_window.view">
-        <field name="sequence">3</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_stock_picking_batch_graph"/>
-        <field name="act_window_id" ref="stock_picking_batch.stock_picking_batch_action"/>
+    <!-- gantt chart -->
+    <record id="view_stock_picking_batch_gantt" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.graph</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <gantt date_start="date_start"
+                   date_stop="date_finished"
+                   string="Transport Operations"
+                   default_group_by="dock_id,vehicle_id"
+                   decoration-info = "state == 'draft'"
+                   decoration-success = "state == 'done'"
+                   color = "vehicle_id"
+                   sample="1">
+                <templates>
+                    <field name="state"/>
+                    <div class="container-fluid">
+                        <div class="row g-0">
+                            <div class="col">
+                                <ul class="ps-1 mb-0 list-unstyled">
+                                    <li><strong>Start Date: </strong><t t-esc="date_start.toFormat('F')"/></li>
+                                    <li><strong>Stop Date: </strong><t t-esc="date_finished.toFormat('F')"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </gantt>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch.stock_picking_batch_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form,graph,gantt</field>
     </record>
 
 </odoo>

@@ -4,7 +4,7 @@
 {
     'name':'Stock Custom',
     'version':'1.0',
-    'depends': ['base', 'stock'],
+    'depends': ['stock'],
     'data':[
         'views/res_config_settings_views.xml',
     ],

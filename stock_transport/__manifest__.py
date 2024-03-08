@@ -4,7 +4,7 @@
 {
     'name':'Stock Transport',
     'version':'1.0',
-    'depends': ['base', 'stock_picking_batch', 'fleet'],
+    'depends': ['stock_picking_batch', 'fleet'],
     'data':[
         'security/ir.model.access.csv',
 

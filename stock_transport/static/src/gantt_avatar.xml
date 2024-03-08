@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="stock_transport.AvatarGanttRenderer" t-inherit="web_gantt.GanttRenderer.RowContent" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_gantt_pill')]" position="inside">
+            <t t-foreach="state.vehicleNames" t-as="vehicleName" t-key="vehicleName">
+                <span t-esc="vehicleName"/>
+            </t>
+        </xpath>
+    </t>
+</templates>

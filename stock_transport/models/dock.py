@@ -6,6 +6,6 @@ from odoo import fields, models,api
 class Dock(models.Model):
     _name = 'dock'
 
-    name = fields.Char(string = "Dock", help="Name of dock")
+    name = fields.Char(string = "Dock", help="Name of dock must be unique")
 
     _sql_constraints = [("name", "UNIQUE(name)", "Name should not be repeated")]

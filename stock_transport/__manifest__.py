@@ -4,7 +4,7 @@
 {
     'name':'Stock Transport',
     'version':'1.0',
-    'depends': ['base', 'stock_picking_batch', 'fleet'],
+    'depends': ['stock_picking_batch', 'fleet', 'web_gantt'],
     'data':[
         'security/ir.model.access.csv',
 
@@ -12,6 +12,11 @@
         'views/st_batch_transfer_trans.xml',
         'views/st_batch_transfering.xml'
     ],
+    'assets': {
+        'web.assets_backend': [
+            'stock_transport/static/src/**/*',
+        ],
+    },
     'author': "Odoo",
     'category':'Stock Transport/Brokerage',
     'sequence':'1',
